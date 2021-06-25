@@ -442,7 +442,7 @@ namespace characterAnimations {
      * @param frameInterval the amount of time to spend on each frame in milliseconds
      * @param rule      the rule that decides when this animation will play
      */
-    //% blockid=arcade_character_loop_frames
+    //% blockId=arcade_character_loop_frames
     //% block="$sprite loop frames $frames $frameInterval when $rule"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
@@ -475,7 +475,7 @@ namespace characterAnimations {
      * @param frameInterval the amount of time to spend on each frame in milliseconds
      * @param rule      the rule that decides when this animation will play
      */
-    //% blockid=arcade_character_run_frames
+    //% blockId=arcade_character_run_frames
     //% block="$sprite run frames $frames $frameInterval when $rule becomes true"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
@@ -501,7 +501,7 @@ namespace characterAnimations {
      * @param sprite    The sprite to check the state of
      * @param rule      The rule to check
      */
-    //% blockid=arcade_character_is_facing
+    //% blockId=arcade_character_is_facing
     //% block="$sprite is $rule"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
@@ -561,7 +561,7 @@ namespace characterAnimations {
      * @param sprite    The sprite to enable/disable animations on
      * @param enabled   True to enable, false to disable
      */
-    //% blockid=arcade_character_animation_enabled
+    //% blockId=arcade_character_animation_enabled
     //% block="$sprite enable character animations $enabled"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
@@ -583,7 +583,7 @@ namespace characterAnimations {
      * @param sprite    The sprite to set the state of
      * @param rule      The state to set on the sprite
      */
-    //% blockid=arcade_character_animation_set_state
+    //% blockId=arcade_character_animation_set_state
     //% block="$sprite set state to $rule"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
@@ -602,7 +602,7 @@ namespace characterAnimations {
      *
      * @param sprite    The sprite to clear the state of
      */
-    //% blockid=arcade_character_animation_clear_state
+    //% blockId=arcade_character_animation_clear_state
     //% block="$sprite clear state"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
@@ -618,7 +618,7 @@ namespace characterAnimations {
      * with more clauses will override rules with fewer clauses. Invalid
      * rules (e.g. "moving left AND moving right") are ignored.
      */
-    //% blockid=arcade_character_make_rule
+    //% blockId=arcade_character_make_rule
     //% block="$p1||and $p2 and $p3 and $p4 and $p5"
     //% inlineInputMode=inline
     //% p1.shadow=arcade_character_predicate
@@ -664,7 +664,7 @@ namespace characterAnimations {
      *
      * @frames  An array of images
      */
-    //% blockid=arcade_character_animation_editor block="$frames"
+    //% blockId=arcade_character_animation_editor block="$frames"
     //% shim=TD_ID
     //% frames.fieldEditor="animation"
     //% frames.fieldOptions.decompileLiterals="true"
@@ -680,7 +680,7 @@ namespace characterAnimations {
     /**
      * A clause for a sprite animation rule.
      */
-    //% blockid=arcade_character_predicate block="$predicate"
+    //% blockId=arcade_character_predicate block="$predicate"
     //% shim=TD_ID
     //% weight=20
     //% help=github:arcade-character-animations/docs/predicate
