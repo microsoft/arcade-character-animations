@@ -38,7 +38,7 @@ enum Predicate {
     HittingWallLeft = 1 << 13,
 }
 
-//% color="#7d6282" icon="\uf03d" block="character"
+//% color="#7d6282" icon="\uf03d" block="Character"
 namespace characterAnimations {
     export type Rule = number;
 
