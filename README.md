@@ -24,7 +24,7 @@ This example shows how to make a simple top-down style game where you can walk i
 
 https://makecode.com/_AiHHa2WyoTbg
 
-!()[./pngs/top-down.png]
+![A picture of blocks in the top-down example](./pngs/top-down.png)
 
 One way you could extend this example is to add animations when the character is pushing up against a wall!
 
@@ -35,7 +35,7 @@ This example creates common animations that you might use in a platformer: runni
 
 https://makecode.com/_Msz5ftemyYtU
 
-!()[./pngs/platformer.png]
+![A picture of blocks in the platformer example](./pngs/platformer.png)
 
 You could extend this example by adding different animations for when the player is jumping vs falling!
 
