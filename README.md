@@ -18,16 +18,6 @@ If we wanted to add jumping to our sprite, we could create two more rules that l
 
 You might notice that one of the jumping rules will be true whenever the running rules are true. In this extension, the most specific rule will always override all of the others. So, if we have a sprite that is moving, facing right, and hitting a wall downwards, the running rule will run since it is more specific (it has three parts instead of two).
 
-### Example: walking in four directions
-
-This example shows how to make a simple top-down style game where you can walk in all four directions.
-
-https://makecode.com/_AiHHa2WyoTbg
-
-![A picture of blocks in the top-down example](./pngs/top-down.png)
-
-One way you could extend this example is to add animations when the character is pushing up against a wall!
-
 
 ### Example: sidescrolling platformer
 
@@ -38,6 +28,17 @@ https://makecode.com/_Msz5ftemyYtU
 ![A picture of blocks in the platformer example](./pngs/platformer.png)
 
 You could extend this example by adding different animations for when the player is jumping vs falling!
+
+
+### Example: walking in four directions
+
+This example shows how to make a simple top-down style game where you can walk in all four directions.
+
+https://makecode.com/_AiHHa2WyoTbg
+
+![A picture of blocks in the top-down example](./pngs/top-down.png)
+
+One way you could extend this example is to add animations when the character is pushing up against a wall!
 
 
 ## Supported targets
