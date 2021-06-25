@@ -10,9 +10,9 @@ For example, in cutscenes or games where projectiles come towards the player.
 If your game uses velocity or the "move sprite with controller" block, you should probably avoid using this function.
 
 ```sig
-character.setCharacterState(sprites.create(img`
+characterAnimations.setCharacterState(sprites.create(img`
     .
-    `, character.rule(Predicate.NotMoving))
+    `, characterAnimations.rule(Predicate.NotMoving))
 ```
 
 ## Parameters
@@ -32,13 +32,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         for (let value of sprites.allOfKind(SpriteKind.Projectile)) {
             value.setVelocity(0, 0)
         }
-        character.setCharacterState(mySprite, character.rule(Predicate.NotMoving))
+        characterAnimations.setCharacterState(mySprite, characterAnimations.rule(Predicate.NotMoving))
         mySprite.say("PAUSE")
     } else {
         for (let value of sprites.allOfKind(SpriteKind.Projectile)) {
             value.setVelocity(-50, 0)
         }
-        character.setCharacterState(mySprite, character.rule(Predicate.MovingRight))
+        characterAnimations.setCharacterState(mySprite, characterAnimations.rule(Predicate.MovingRight))
         mySprite.say("")
     }
 })
@@ -64,7 +64,7 @@ mySprite = sprites.create(img`
     .......ffff2cf..........
     ........fffff...........
     `, SpriteKind.Player)
-character.loopFrames(
+characterAnimations.loopFrames(
 mySprite,
 [img`
     ..ccc.........ffffff....
@@ -170,9 +170,9 @@ mySprite,
     ........fff2c...........
     `],
 200,
-character.rule(Predicate.MovingRight)
+characterAnimations.rule(Predicate.MovingRight)
 )
-character.setCharacterState(mySprite, character.rule(Predicate.MovingRight))
+characterAnimations.setCharacterState(mySprite, characterAnimations.rule(Predicate.MovingRight))
 stopped = false
 game.onUpdateInterval(1000, function () {
     if (!(stopped)) {

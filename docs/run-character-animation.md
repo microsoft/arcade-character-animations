@@ -8,7 +8,7 @@ This function is useful for animating when a sprite moves from one state to anot
 For example, if a falling sprite lands on the ground you can run a landing animation before looping an idle animation.
 
 ```sig
-character.runFrames(
+characterAnimations.runFrames(
 sprites.create(img`
     .
     `,
@@ -16,7 +16,7 @@ sprites.create(img`
     .
     `],
     500,
-character.rule(Predicate.NotMoving)
+characterAnimations.rule(Predicate.NotMoving)
 )
 ```
 
@@ -52,7 +52,7 @@ jumper = sprites.create(img`
     . 6 . 6 . 6 6 6 6 6 . 6 . 6 .
     6 . . . 6 6 6 6 6 6 6 . . . 6
     `, SpriteKind.Player)
-character.runFrames(
+characterAnimations.runFrames(
 jumper,
 [img`
     . . . . . . . . . . . . . . .
@@ -116,9 +116,9 @@ jumper,
     . . . . . . . . . . . . . . .
     `],
 25,
-character.rule(Predicate.MovingUp)
+characterAnimations.rule(Predicate.MovingUp)
 )
-character.runFrames(
+characterAnimations.runFrames(
 jumper,
 [img`
     . . . . . 6 6 6 6 6 . . . . .
@@ -182,9 +182,9 @@ jumper,
     6 . . . 6 6 6 6 6 6 6 . . . 6
     `],
 10,
-character.rule(Predicate.NotMoving)
+characterAnimations.rule(Predicate.NotMoving)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 jumper,
 [img`
     . . . . . . . . . . . . . . .
@@ -212,7 +212,7 @@ jumper,
     6 . . . . . . . . . . . . . 6
     `],
 500,
-character.rule(Predicate.NotMoving)
+characterAnimations.rule(Predicate.NotMoving)
 )
 jumper.bottom = 120
 game.onUpdate(function () {

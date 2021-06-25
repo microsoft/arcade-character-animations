@@ -8,7 +8,7 @@ If another animation is registered using run frames with a rule that also matche
 the animation will start looping after the other animation has completed.
 
 ```sig
-character.loopFrames(
+characterAnimations.loopFrames(
 sprites.create(img`
     .
     `,
@@ -16,7 +16,7 @@ sprites.create(img`
     .
     `],
     500,
-character.rule(Predicate.NotMoving)
+characterAnimations.rule(Predicate.NotMoving)
 )
 ```
 
@@ -51,7 +51,7 @@ let thePlayer = sprites.create(img`
     . . . . . f f f f f f . . . . .
     . . . . . f f . . f f . . . . .
     `, SpriteKind.Player)
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . f f f f f f . . . .
@@ -123,9 +123,9 @@ thePlayer,
     . . . . . f f . . . f f f . . .
     `],
 200,
-character.rule(Predicate.MovingRight)
+characterAnimations.rule(Predicate.MovingRight)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . f f f f . . . . . .
@@ -197,9 +197,9 @@ thePlayer,
     . . . . . . . . . f f f . . . .
     `],
 200,
-character.rule(Predicate.MovingDown)
+characterAnimations.rule(Predicate.MovingDown)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . f f f f f f . . . . . .
@@ -271,9 +271,9 @@ thePlayer,
     . . . f f f . . . f f . . . . .
     `],
 200,
-character.rule(Predicate.MovingLeft)
+characterAnimations.rule(Predicate.MovingLeft)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . f f f f . . . . . .
@@ -345,7 +345,7 @@ thePlayer,
     . . . . . . . . . f f f . . . .
     `],
 200,
-character.rule(Predicate.MovingUp)
+characterAnimations.rule(Predicate.MovingUp)
 )
 controller.moveSprite(thePlayer)
 

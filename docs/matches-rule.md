@@ -5,9 +5,9 @@ Checks the state of a sprite and returns true if it currently fulfills the given
 A sprite will not match any "Facing" rule unless it has at least one animation that uses that rule.
 
 ```sig
-character.matchesRule(sprites.create(img`
+characterAnimations.matchesRule(sprites.create(img`
     .
-    `, character.rule(Predicate.NotMoving))
+    `, characterAnimations.rule(Predicate.NotMoving))
 ```
 
 ## Parameters
@@ -21,7 +21,7 @@ This example checks to see if the player is facing left or right in the A button
 
 ```blocks
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (character.matchesRule(thePlayer, character.rule(Predicate.FacingLeft))) {
+    if (characterAnimations.matchesRule(thePlayer, characterAnimations.rule(Predicate.FacingLeft))) {
         projectile = sprites.createProjectileFromSprite(img`
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
@@ -82,7 +82,7 @@ thePlayer = sprites.create(img`
     . f f f f f f f f f f .
     . . f f . . . f f f . .
     `, SpriteKind.Player)
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . . . . . . .
@@ -137,9 +137,9 @@ thePlayer,
     . . . . f f f . . . . .
     `],
 100,
-character.rule(Predicate.FacingRight)
+characterAnimations.rule(Predicate.FacingRight)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . . . . . . .
@@ -194,7 +194,7 @@ thePlayer,
     . . . . . f f f . . . .
     `],
 100,
-character.rule(Predicate.FacingLeft)
+characterAnimations.rule(Predicate.FacingLeft)
 )
 controller.moveSprite(thePlayer)
 

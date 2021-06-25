@@ -4,6 +4,12 @@ Clears the current state of a [sprite](/types/sprite).
 If the state has been manually set, clearing the state will cause automatic state updates to start again.
 This will also reset whatever direction the sprite is currently facing.
 
+```sig
+characterAnimations.clearCharacterState(sprites.create(img`
+    .
+    `)
+```
+
 ## Parameters
 
 * **sprite**: a [sprite](/types/sprite) to clear the state of
@@ -15,11 +21,11 @@ Press B to clear that state and automatically update the state again.
 
 ```blocks
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    character.clearCharacterState(thePlayer)
+    characterAnimations.clearCharacterState(thePlayer)
     thePlayer.say("")
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    character.setCharacterState(thePlayer, character.rule(Predicate.MovingDown))
+    characterAnimations.setCharacterState(thePlayer, characterAnimations.rule(Predicate.MovingDown))
     thePlayer.say("LOCKED")
 })
 let thePlayer: Sprite = null
@@ -42,7 +48,7 @@ thePlayer = sprites.create(img`
     . . . f f 1 d 1 d 1 d f f . . .
     . . . . . f f b b f f . . . . .
     `, SpriteKind.Player)
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . f f 4 4 f f . . . . .
@@ -114,9 +120,9 @@ thePlayer,
     . . . . . f b b f f f . . . . .
     `],
 100,
-character.rule(Predicate.MovingDown)
+characterAnimations.rule(Predicate.MovingDown)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . f f 4 4 f f . . . . .
@@ -188,9 +194,9 @@ thePlayer,
     . . . . . f f f b b f . . . . .
     `],
 100,
-character.rule(Predicate.MovingUp)
+characterAnimations.rule(Predicate.MovingUp)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . f f f f 4 4 f . . .
@@ -228,9 +234,9 @@ thePlayer,
     . . . . . f f f b b f f f . . .
     `],
 100,
-character.rule(Predicate.MovingRight)
+characterAnimations.rule(Predicate.MovingRight)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . f 4 4 f f f f . . . . . .
@@ -268,7 +274,7 @@ thePlayer,
     . . . f f f b b f f f . . . . .
     `],
 100,
-character.rule(Predicate.MovingLeft)
+characterAnimations.rule(Predicate.MovingLeft)
 )
 controller.moveSprite(thePlayer)
 

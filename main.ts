@@ -59,12 +59,12 @@ namespace characterAnimations {
 
             let cleanup = false;
             for (const character of this.characters) {
-                if (character.sprite.flags & sprites.Flag.Destroyed) cleanup = true;
-                character.update(dt);
+                if (characterAnimations.sprite.flags & sprites.Flag.Destroyed) cleanup = true;
+                characterAnimations.update(dt);
             }
 
             if (cleanup) {
-                this.characters = this.characters.filter(character => !(character.sprite.flags & sprites.Flag.Destroyed))
+                this.characters = this.characters.filter(character => !(characterAnimations.sprite.flags & sprites.Flag.Destroyed))
             }
         }
     }

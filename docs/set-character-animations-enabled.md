@@ -4,7 +4,7 @@ Enables or disables all animations with rules on a given [sprite](/types/sprite)
 This function is useful if you want to temporarily run a normal animation on a sprite without it being overridden by another animation.
 
 ```sig
-character.setCharacterAnimationsEnabled(sprites.create(img`
+characterAnimations.setCharacterAnimationsEnabled(sprites.create(img`
     .
     `, true)
 ```
@@ -20,7 +20,7 @@ In this example, we create a character and an enemy sprite. When the character o
 
 ```blocks
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    character.setCharacterAnimationsEnabled(sprite, false)
+    characterAnimations.setCharacterAnimationsEnabled(sprite, false)
     animation.runImageAnimation(
     sprite,
     [img`
@@ -70,7 +70,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     animation.stopAnimation(animation.AnimationTypes.All, sprite)
     controller.moveSprite(sprite)
     sprite.setFlag(SpriteFlag.GhostThroughSprites, false)
-    character.setCharacterAnimationsEnabled(sprite, true)
+    characterAnimations.setCharacterAnimationsEnabled(sprite, true)
 })
 let angle = 0
 scene.setBackgroundColor(7)
@@ -92,7 +92,7 @@ let thePlayer = sprites.create(img`
     . . . . . f f f f f f . . . . .
     . . . . . f f . . f f . . . . .
     `, SpriteKind.Player)
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . f f f f f f . . . .
@@ -130,9 +130,9 @@ thePlayer,
     . . . . . f f . . . f f f . . .
     `],
 500,
-character.rule(Predicate.MovingRight)
+characterAnimations.rule(Predicate.MovingRight)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . f f f f . . . . . .
@@ -170,9 +170,9 @@ thePlayer,
     . . . . f f f . . . . . . . . .
     `],
 500,
-character.rule(Predicate.MovingDown)
+characterAnimations.rule(Predicate.MovingDown)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . f f f f f f . . . . . .
@@ -210,9 +210,9 @@ thePlayer,
     . . . f f f . . . f f . . . . .
     `],
 500,
-character.rule(Predicate.MovingLeft)
+characterAnimations.rule(Predicate.MovingLeft)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 thePlayer,
 [img`
     . . . . . . f f f f . . . . . .
@@ -250,7 +250,7 @@ thePlayer,
     . . . . f f f . . . . . . . . .
     `],
 500,
-character.rule(Predicate.MovingUp)
+characterAnimations.rule(Predicate.MovingUp)
 )
 controller.moveSprite(thePlayer)
 let mySprite2 = sprites.create(img`

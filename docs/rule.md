@@ -8,7 +8,7 @@ Rules that are impossible, like "Moving and NotMoving", are always ignored.
 
 
 ```sig
-character.rule(Predicate.NotMoving)
+characterAnimations.rule(Predicate.NotMoving)
 ```
 
 ## Parameters
@@ -69,7 +69,7 @@ let hero = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.Player)
-character.loopFrames(
+characterAnimations.loopFrames(
 hero,
 [img`
     ........................
@@ -123,9 +123,9 @@ hero,
     ........................
     `],
 100,
-character.rule(Predicate.Moving, Predicate.FacingRight)
+characterAnimations.rule(Predicate.Moving, Predicate.FacingRight)
 )
-character.loopFrames(
+characterAnimations.loopFrames(
 hero,
 [img`
     ........................
@@ -179,7 +179,7 @@ hero,
     ........................
     `],
 100,
-character.rule(Predicate.Moving, Predicate.FacingLeft)
+characterAnimations.rule(Predicate.Moving, Predicate.FacingLeft)
 )
 controller.moveSprite(hero)
 
