@@ -448,7 +448,7 @@ namespace characterAnimations {
     //% sprite.shadow=variables_get
     //% frames.shadow=animation_editor
     //% frameInterval.shadow=timePicker
-    //% rule.shadow=character_make_rule
+    //% rule.shadow=arcade_character_make_rule
     //% weight=100
     //% blockGap=8
     //% help=github:arcade-character-animations/docs/loop-character-animation
@@ -481,7 +481,7 @@ namespace characterAnimations {
     //% sprite.shadow=variables_get
     //% frames.shadow=animation_editor
     //% frameInterval.shadow=timePicker
-    //% rule.shadow=character_make_rule
+    //% rule.shadow=arcade_character_make_rule
     //% weight=90
     //% help=github:arcade-character-animations/docs/run-character-animation
     export function runFrames(sprite: Sprite, frames: Image[], frameInterval: number, rule: Rule) {
@@ -505,7 +505,7 @@ namespace characterAnimations {
     //% block="$sprite is $rule"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
-    //% rule.shadow=character_make_rule
+    //% rule.shadow=arcade_character_make_rule
     //% weight=80
     //% help=github:arcade-character-animations/docs/matches-rule
     export function matchesRule(sprite: Sprite, rule: Rule): boolean {
@@ -587,7 +587,7 @@ namespace characterAnimations {
     //% block="$sprite set state to $rule"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
-    //% rule.shadow=character_make_rule
+    //% rule.shadow=arcade_character_make_rule
     //% weight=60
     //% blockGap=8
     //% help=github:arcade-character-animations/docs/set-character-state
@@ -621,11 +621,11 @@ namespace characterAnimations {
     //% blockid=arcade_character_make_rule
     //% block="$p1||and $p2 and $p3 and $p4 and $p5"
     //% inlineInputMode=inline
-    //% p1.shadow=character_predicate
-    //% p2.shadow=character_predicate
-    //% p3.shadow=character_predicate
-    //% p4.shadow=character_predicate
-    //% p5.shadow=character_predicate
+    //% p1.shadow=arcade_character_predicate
+    //% p2.shadow=arcade_character_predicate
+    //% p3.shadow=arcade_character_predicate
+    //% p4.shadow=arcade_character_predicate
+    //% p5.shadow=arcade_character_predicate
     //% weight=40
     //% blockGap=8
     //% help=github:arcade-character-animations/docs/rule
