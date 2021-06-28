@@ -23,7 +23,7 @@ You might notice that one of the jumping rules will be true whenever the running
 
 This example shows how to make a simple top-down style game where you can walk in all four directions.
 
-https://makecode.com/_AiHHa2WyoTbg
+https://makecode.com/_XV2EmJas4i8o
 
 ![A picture of blocks in the top-down example](./pngs/top-down.png)
 
@@ -34,7 +34,7 @@ One way you could extend this example is to add animations when the character is
 
 This example creates common animations that you might use in a platformer: running, jumping, and idling.
 
-https://makecode.com/_Msz5ftemyYtU
+https://makecode.com/_AD7hpC9pzW47
 
 ![A picture of blocks in the platformer example](./pngs/platformer.png)
 
