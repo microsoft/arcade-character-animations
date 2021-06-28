@@ -14,7 +14,8 @@
         "docs/predicate.md",
         "docs/run-character-animation.md",
         "docs/set-character-animations-enabled.md",
-        "docs/set-character-state.md"
+        "docs/set-character-state.md",
+        "docs/rule.md"
     ],
     "testFiles": [
         "test.ts"
