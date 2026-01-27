@@ -201,5 +201,5 @@ game.onUpdateInterval(1000, function () {
 ```
 
 ```package
-arcade-story=github:microsoft/arcade-character-animations
+arcade-character-animations=github:microsoft/arcade-character-animations
 ```

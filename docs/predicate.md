@@ -8,3 +8,6 @@ Predicates can be combined to form rules.
 Predicate.NotMoving
 ```
 
+```package
+arcade-character-animations=github:microsoft/arcade-character-animations
+```
