@@ -699,10 +699,12 @@ namespace characterAnimations {
      * @param controlledBy The controller that controls this sprite. If not specified, player 1 controller is used.
      */
     //% blockId=arcade_character_animation_set_controller
-    //% block="$sprite set facing controlled by buttons $enabled||$controlledBy"
+    //% block="$sprite control facing direction with buttons $enabled||$controlledBy"
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
     //% weight=48
+    //% blockGap=8
+    //% group="Facing"
     //% help=github:arcade-character-animations/docs/set-controller
     export function setController(sprite: Sprite, enabled: boolean, controlledBy?: controller.Controller) {
         if (enabled) {
@@ -733,6 +735,7 @@ namespace characterAnimations {
     //% direction.shadow=arcade_character_facing_direction
     //% weight=45
     //% blockGap=8
+    //% group="Facing"
     //% help=github:arcade-character-animations/docs/lock-facing-direction
     export function lockFacingDirection(sprite: Sprite, direction: number) {
         const state = getStateForSprite(sprite, true);
@@ -752,6 +755,7 @@ namespace characterAnimations {
     //% sprite.defl=mySprite
     //% sprite.shadow=variables_get
     //% weight=44
+    //% group="Facing"
     //% help=github:arcade-character-animations/docs/unlock-facing-direction
     export function unlockFacingDirection(sprite: Sprite) {
         const state = getStateForSprite(sprite, false);
@@ -841,6 +845,7 @@ namespace characterAnimations {
     //% blockId=arcade_character_facing_direction block="$direction"
     //% shim=TD_ID
     //% weight=10
+    //% group="Facing"
     //% help=github:arcade-character-animations/docs/facing-direction
     export function _direction(direction: FacingDirection): number {
         return direction;
