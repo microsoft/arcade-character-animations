@@ -44,12 +44,16 @@ namespace characterAnimations {
 
     export enum FacingDirection {
         //% block="up"
+        //% blockIdentity="characterAnimations._direction"
         Up = Predicate.FacingUp,
         //% block="right"
+        //% blockIdentity="characterAnimations._direction"
         Right = Predicate.FacingRight,
         //% block="down"
+        //% blockIdentity="characterAnimations._direction"
         Down = Predicate.FacingDown,
         //% block="left"
+        //% blockIdentity="characterAnimations._direction"
         Left = Predicate.FacingLeft,
     }
 
@@ -785,6 +789,7 @@ namespace characterAnimations {
         if (p2) rule |= p2;
         if (p3) rule |= p3;
         if (p4) rule |= p4;
+        if (p5) rule |= p5;
 
         // Check for invalid rules
         if (
