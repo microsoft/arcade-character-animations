@@ -15,7 +15,11 @@
         "docs/run-character-animation.md",
         "docs/set-character-animations-enabled.md",
         "docs/set-character-state.md",
-        "docs/rule.md"
+        "docs/rule.md",
+        "docs/set-controller.md",
+        "docs/lock-facing-direction.md",
+        "docs/facing-direction.md",
+        "docs/unlock-facing-direction.md"
     ],
     "testFiles": [
         "test.ts"

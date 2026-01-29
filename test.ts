@@ -89,7 +89,7 @@ mySprite,
     . . . . . . . . . f f f . . . .
     `],
 500,
-characterAnimations.rule(Predicate.MovingDown)
+characterAnimations.rule(Predicate.Moving, Predicate.FacingDown)
 )
 characterAnimations.loopFrames(
 mySprite,
@@ -163,7 +163,7 @@ mySprite,
     . . . . . . . . . f f f . . . .
     `],
 500,
-characterAnimations.rule(Predicate.MovingUp)
+characterAnimations.rule(Predicate.Moving, Predicate.FacingUp)
 )
 characterAnimations.loopFrames(
 mySprite,
@@ -237,7 +237,7 @@ mySprite,
     . . . . . . . f f f . . . . . .
     `],
 500,
-characterAnimations.rule(Predicate.MovingRight)
+characterAnimations.rule(Predicate.Moving, Predicate.FacingRight)
 )
 characterAnimations.loopFrames(
 mySprite,
@@ -311,7 +311,7 @@ mySprite,
     . . . f f f . . . f f . . . . .
     `],
 500,
-characterAnimations.rule(Predicate.MovingLeft)
+characterAnimations.rule(Predicate.Moving, Predicate.FacingLeft)
 )
 characterAnimations.loopFrames(
 mySprite,
@@ -690,3 +690,20 @@ mySprite,
 characterAnimations.rule(Predicate.FacingUp, Predicate.NotMoving)
 )
 
+let flip = false;
+
+// characterAnimations.setController(mySprite, true)
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    flip = !flip;
+
+    if (flip) {
+        characterAnimations.lockFacingDirection(mySprite, characterAnimations.FacingDirection.Left)
+    } else {
+        characterAnimations.unlockFacingDirection(mySprite);
+    }
+})
+game.onUpdate(function () {
+    mySprite.x ++;
+})
+
+mySprite.setFlag(SpriteFlag.StayInScreen, true)

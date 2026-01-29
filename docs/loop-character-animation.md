@@ -352,5 +352,5 @@ controller.moveSprite(thePlayer)
 ```
 
 ```package
-arcade-story=github:microsoft/arcade-character-animations
+arcade-character-animations=github:microsoft/arcade-character-animations
 ```

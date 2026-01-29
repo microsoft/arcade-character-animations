@@ -42,6 +42,21 @@ enum Predicate {
 namespace characterAnimations {
     export type Rule = number;
 
+    export enum FacingDirection {
+        //% block="up"
+        //% blockIdentity="characterAnimations._direction"
+        Up = Predicate.FacingUp,
+        //% block="right"
+        //% blockIdentity="characterAnimations._direction"
+        Right = Predicate.FacingRight,
+        //% block="down"
+        //% blockIdentity="characterAnimations._direction"
+        Down = Predicate.FacingDown,
+        //% block="left"
+        //% blockIdentity="characterAnimations._direction"
+        Left = Predicate.FacingLeft,
+    }
+
     const FACING = Predicate.FacingUp | Predicate.FacingRight | Predicate.FacingDown | Predicate.FacingLeft;
     const MOVING = Predicate.MovingUp | Predicate.MovingRight | Predicate.MovingDown | Predicate.MovingLeft | Predicate.Moving;
 
@@ -95,6 +110,9 @@ namespace characterAnimations {
         protected frame: number;
 
         protected manualFlags: number;
+
+        protected controller: controller.Controller;
+        protected lockedFacingDirection: number;
 
         constructor(public sprite: Sprite) {
             this.animations = [];
@@ -170,7 +188,7 @@ namespace characterAnimations {
                     state |= (this.lastState & FACING)
                 }
             }
-            else if (this.sprite.x != this.lastX || this.sprite.y != this.lastY) {
+            else if (this.sprite.x != this.lastX || this.sprite.y != this.lastY && (this.lastX != undefined && this.lastY != undefined)) {
                 state |= Predicate.Moving;
 
                 if (this.sprite.x > this.lastX) {
@@ -212,7 +230,48 @@ namespace characterAnimations {
             this.lastX = this.sprite.x;
             this.lastY = this.sprite.y;
 
+            if (this.lockedFacingDirection) {
+                state = (state & ~FACING) | this.lockedFacingDirection;
+            }
+            // If this sprite is controlled by a controller, use that to
+            // determine facing direction
+            else if (this.controller) {
+                let facing = 0;
+                if (this.controller.up.isPressed() && Predicate.FacingUp & this.possibleFacingDirections) {
+                    facing |= Predicate.FacingUp;
+                }
+                else if (this.controller.down.isPressed() && Predicate.FacingDown & this.possibleFacingDirections) {
+                    facing |= Predicate.FacingDown;
+                }
 
+                if (this.controller.left.isPressed() && Predicate.FacingLeft & this.possibleFacingDirections) {
+                    facing |= Predicate.FacingLeft;
+                }
+                else if (this.controller.right.isPressed() && Predicate.FacingRight & this.possibleFacingDirections) {
+                    facing |= Predicate.FacingRight;
+                }
+
+                state &= ~FACING;
+
+                if (facing) {
+                    state |= facing;
+                }
+                else if (this.lastState & FACING) {
+                    state |= (this.lastState & FACING);
+                }
+                else if (this.possibleFacingDirections & Predicate.FacingLeft) {
+                    state |= Predicate.FacingLeft;
+                }
+                else if (this.possibleFacingDirections & Predicate.FacingDown) {
+                    state |= Predicate.FacingDown;
+                }
+                else if (this.possibleFacingDirections & Predicate.FacingUp) {
+                    state |= Predicate.FacingUp;
+                }
+                else if (this.possibleFacingDirections & Predicate.FacingRight) {
+                    state |= Predicate.FacingRight;
+                }
+            }
 
             const newAnimation = this.pickRule(this.manualFlags || state);
             if (newAnimation !== this.current) {
@@ -270,15 +329,29 @@ namespace characterAnimations {
         }
 
         setEnabled(enabled: boolean) {
+            if (this.enabled === enabled) return;
+
             this.enabled = enabled;
-            if (enabled && this.current) {
-                if (this.runningStartFrames) {
-                    this.sprite.setImage(this.current.startFrames[this.frame])
+            if (enabled) {
+                if (this.current) {
+                    if (this.runningStartFrames) {
+                        this.sprite.setImage(this.current.startFrames[this.frame])
+                    }
+                    else {
+                        this.sprite.setImage(this.current.loopFrames[this.frame])
+                    }
                 }
-                else {
-                    this.sprite.setImage(this.current.loopFrames[this.frame])
-                }
+                this.lastX = undefined;
+                this.lastY = undefined;
             }
+        }
+
+        setController(controller: controller.Controller) {
+            this.controller = controller;
+        }
+
+        lockFacingDirection(direction: number) {
+            this.lockedFacingDirection = direction;
         }
 
         setManualFlags(flags: Rule) {
@@ -437,6 +510,7 @@ namespace characterAnimations {
      * If multiple rules are equally specific, the currently executing rule
      * is favored (or one is chosen at random).
      *
+     *
      * @param sprite    the sprite to animate
      * @param frames    the images that make up that animation
      * @param frameInterval the amount of time to spend on each frame in milliseconds
@@ -470,6 +544,7 @@ namespace characterAnimations {
      * If multiple rules are equally specific, the currently executing rule
      * is favored (or one is chosen at random).
      *
+     *
      * @param sprite    the sprite to animate
      * @param frames    the images that make up that animation
      * @param frameInterval the amount of time to spend on each frame in milliseconds
@@ -497,6 +572,7 @@ namespace characterAnimations {
      * Use to check the current state of a sprite. Be careful, sprites
      * will only be facing a direction if they have an animation
      * that uses the one of the facing direction rules (e.g. FacingLeft, FacingUp, etc.).
+     *
      *
      * @param sprite    The sprite to check the state of
      * @param rule      The rule to check
@@ -558,6 +634,7 @@ namespace characterAnimations {
      * This is useful for temporarily turning off animations while
      * another animation plays (e.g. an attack animation)
      *
+     *
      * @param sprite    The sprite to enable/disable animations on
      * @param enabled   True to enable, false to disable
      */
@@ -580,6 +657,7 @@ namespace characterAnimations {
      * effect until you call clear state or set the state to something else.
      * Invalid states (i.e. "moving" and "not moving") are ignored.
      *
+     *
      * @param sprite    The sprite to set the state of
      * @param rule      The state to set on the sprite
      */
@@ -600,6 +678,7 @@ namespace characterAnimations {
      * Clear the current state of the sprite. This will also disable any
      * manually set state and re-enable automatic state tracking.
      *
+     *
      * @param sprite    The sprite to clear the state of
      */
     //% blockId=arcade_character_animation_clear_state
@@ -611,6 +690,82 @@ namespace characterAnimations {
     export function clearCharacterState(sprite: Sprite) {
         const state = getStateForSprite(sprite, false);
         if (state) state.clearState();
+    }
+
+    /**
+     * Sets the controller that controls this sprite. When enabled, the directional
+     * buttons of the controller will set the facing direction of the sprite instead
+     * of the velocity and position changes.
+     *
+     *
+     * @param sprite The sprite to set the controller for
+     * @param enabled True if this sprite is controlled by a controller, false otherwise
+     * @param controlledBy The controller that controls this sprite. If not specified, player 1 controller is used.
+     */
+    //% blockId=arcade_character_animation_set_controller
+    //% block="$sprite control facing direction with buttons $enabled||$controlledBy"
+    //% sprite.defl=mySprite
+    //% sprite.shadow=variables_get
+    //% weight=48
+    //% blockGap=8
+    //% group="Facing"
+    //% help=github:arcade-character-animations/docs/set-controller
+    export function setController(sprite: Sprite, enabled: boolean, controlledBy?: controller.Controller) {
+        if (enabled) {
+            if (!controlledBy) {
+                controlledBy = controller.player1;
+            }
+        }
+        else {
+            controlledBy = null;
+        }
+
+        const state = getStateForSprite(sprite, true);
+        state.setController(controlledBy);
+    }
+
+    /**
+     * Locks the direction that the sprite is facing to the specified direction. While locked,
+     * the sprite will always be facing that direction regardless of movement or controller input.
+     *
+     *
+     * @param sprite The sprite to lock the facing direction for
+     * @param direction The direction to lock the sprite's facing direction to
+     */
+    //% blockId=arcade_character_animation_lock_facing_direction
+    //% block="$sprite lock facing direction to $direction"
+    //% sprite.defl=mySprite
+    //% sprite.shadow=variables_get
+    //% direction.shadow=arcade_character_facing_direction
+    //% weight=45
+    //% blockGap=8
+    //% group="Facing"
+    //% help=github:arcade-character-animations/docs/lock-facing-direction
+    export function lockFacingDirection(sprite: Sprite, direction: number) {
+        const state = getStateForSprite(sprite, true);
+        state.lockFacingDirection(direction);
+    }
+
+    /**
+     * Unlocks the facing direction of the specified sprite, allowing it to change
+     * based on movement and controller input again. This only has an effect if the
+     * facing direction was previously locked.
+     *
+     *
+     * @param sprite The sprite to unlock the facing direction for
+     */
+    //% blockId=arcade_character_animation_unlock_facing_direction
+    //% block="$sprite unlock facing direction"
+    //% sprite.defl=mySprite
+    //% sprite.shadow=variables_get
+    //% weight=44
+    //% group="Facing"
+    //% help=github:arcade-character-animations/docs/unlock-facing-direction
+    export function unlockFacingDirection(sprite: Sprite) {
+        const state = getStateForSprite(sprite, false);
+        if (state) {
+            state.lockFacingDirection(0);
+        }
     }
 
     /**
@@ -634,6 +789,7 @@ namespace characterAnimations {
         if (p2) rule |= p2;
         if (p3) rule |= p3;
         if (p4) rule |= p4;
+        if (p5) rule |= p5;
 
         // Check for invalid rules
         if (
@@ -686,5 +842,17 @@ namespace characterAnimations {
     //% help=github:arcade-character-animations/docs/predicate
     export function _predicate(predicate: Predicate): number {
         return predicate
+    }
+
+    /**
+     * A direction a sprite can face
+     */
+    //% blockId=arcade_character_facing_direction block="$direction"
+    //% shim=TD_ID
+    //% weight=10
+    //% group="Facing"
+    //% help=github:arcade-character-animations/docs/facing-direction
+    export function _direction(direction: FacingDirection): number {
+        return direction;
     }
 }
